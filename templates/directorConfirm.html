@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+   
+      <h2 style = "text-align: center;">Your registration needs to be confirmed</h2>
+      
+      <form action = "http://localhost:5000/login" method = post>
+         <fieldset>
+            <legend>Registration Information</legend>
+            {{ form.hidden_tag() }}
+            
+            <div style = font-size:20px; font-weight:bold; margin-left:150px;>
+               {{ form.message }} {{object.email}}<br>
+         </div>
+            
+         </fieldset>
+      </form>
+      
+{% endblock %}

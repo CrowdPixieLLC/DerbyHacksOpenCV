@@ -1,0 +1,15 @@
+# unit file for running cpflask goes in etc/systemd/system
+
+[Unit]
+Description=Gunicorn instance to serve cpflask
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/CPWebFlask
+Environment="PATH=/home/ubuntu/CPWebFlask/cpflask/bin"
+ExecStart=/home/ubuntu/.virtualenvs/cpflask/bin/gunicorn --workers 3 --bind unix:cpwebflask.sock -m 007 wsgi:app --timeout 240 --keepalive 240
+
+[Install]
+WantedBy=multi-user.target
+             

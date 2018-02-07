@@ -1,0 +1,10 @@
+g++ -std=c++0x -I/usr/local/include/opencv -I/usr/include/python2.7 -I/home/geneo1023/Documents/DevProjects/CP_WriteToParse_DLL -O0 -g3 -Wall -c -fmessage-length=0 -fPIC -MMD -MP -MF"src/CPWriteToParse_DLL.d" -MT"src/CPWriteToParse_DLL.o" -o "src/CPWriteToParse_DLL.o" "../src/CPWriteToParse_DLL.cpp"
+
+g++ -std=c++0x -I/usr/include/opencv -I/usr/include/python2.7 -I/home/geneo1023/Documents/DevProjects/CP_WriteToParse_DLL -O0 -g3 -Wall -c -fmessage-length=0 -fPIC -MMD -MP -MF"src/Pixie.d" -MT"src/Pixie.o" -o "src/Pixie.o" "../src/Pixie.cpp"
+
+g++ -std=c++0x -I/usr/include/opencv -I/usr/include/python2.7 -I/home/geneo1023/Documents/DevProjects/CP_WriteToParse_DLL -O0 -g3 -Wall -c -fmessage-length=0 -fPIC -MMD -MP -MF"src/PixieFonts.d" -MT"src/PixieFonts.o" -o "src/PixieFonts.o" "../src/PixieFonts.cpp"
+
+g++ -L/usr/lib/x86_64-linux-gnu -Xlinker --verbose -shared -o "libCPWriteToParse_DLL.so"  ./src/CPWriteToParse_DLL.o ./src/Pixie.o ./src/PixieFonts.o   -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml -lopencv_video -lcurl 
+
+
+

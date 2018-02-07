@@ -1,0 +1,7 @@
+g++ -std=c++0x -I/usr/include/opencv -I/usr/include/python2.7 -I/home/geneo1023/Documents/DevProjects/CPDetect_DLL_CGCC -O0 -g3 -Wall -c -fmessage-length=0 -fPIC -MMD -MP -MF"src/CP_Detect_DLL.d" -MT"src/CP_Detect_DLL.o" -o "src/CP_Detect_DLL.o" "../src/CP_Detect_DLL.cpp"
+
+g++ -std=c++0x -I/usr/include/opencv -I/usr/include/python2.7 -I/home/geneo1023/Documents/DevProjects/CPDetect_DLL_CGCC -O0 -g3 -Wall -c -fmessage-length=0 -fPIC -MMD -MP -MF"src/Pixie.d" -MT"src/Pixie.o" -o "src/Pixie.o" "../src/Pixie.cpp"
+
+g++ -L/usr/lib/x86_64-linux-gnu -Xlinker --verbose -shared -Wl,-soname=CPDetect_DLL_CGCC -o "libCPDetect_DLL_CGCC.so"  ./src/CP_Detect_DLL.o ./src/Pixie.o   -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_video -lcurl
+
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>CrowdPixieProto</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script type = "text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+	<link rel='icon' href='/static/favicon.ico' type='image/x-icon'>
+</head>
+
+<body>
+	<div class="container-fluid" style="background-color: #ffffff">
+        {% block topnav %}
+				<div class="row">
+					<div class="col-sm-2">  
+                        <h2>DerbyHacks</h2>
+					</div>
+					<div class="col-sm-8">
+						<ul class="nav nav-pills nav-justified">
+							<li class="active"><a href={{ url_for('landing', pk = "NonewithNone") }}>Edit</a></li>
+							<li><a href= {{ url_for('videos') }}>My Videos</a></li>
+							<li><a href= {{ url_for('images')}} >My Pictures</a></li>
+						</ul>
+					</div>
+					<div class="col-sm-2">
+							{% block loginout %}
+								{% if not session.username %}
+									<a href="/login" class="btn btn-primary" role="button" >Login</a>
+								{% else %}
+									<a href={{url_for('settings')}} class="btn btn-primary" role="button" >Profile</a>									
+									<a href="/logout" class="btn btn-primary" role="button" >Logout</a>
+								{% endif %}
+							{% endblock %}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-2">  
+                        <img src="/static/DH_logo.jpg" class="img-rounded" alt="DerbyHacks Logo" width="160" height="160"> 
+					</div>
+					<div class="col-sm-8">  
+		                {% block calltoaction %}
+	                        {% if not session.username %}
+                                <div class="row">
+                                    <div class="panel-body"> 
+                                    <p> <h3> Demonstration of OpenCV Python</h3> </p>
+		                            <p> <a href="/login">Login</a>  to cut images from a video, revise the images and store them.</p> 
+                                    <p> <a href="/register">Register</a> to get to use the App </p>
+	                                </div>
+                                </div>
+	                        {% else %}
+                            <div class="row">
+                                <div class="panel-body"> 
+		                        <p> Upload any video file you like!</p> 
+                                <p> Pick the image you want to save and edit it!</p>
+                                <p> Crop, scale, flip, adjust </p>
+	                            </div>
+                            </div>
+	                        {% endif %}
+		                {% endblock %}  
+					</div>
+				</div>
+
+        {% endblock %}
+      
+
+		{% block title %}
+		{% endblock %}
+
+		{% block visuals %}
+		{% endblock %} 
+
+   		{% block content %}
+    	{% endblock %}
+
+    	</div>	
+	</div>
+</body>
+</html>

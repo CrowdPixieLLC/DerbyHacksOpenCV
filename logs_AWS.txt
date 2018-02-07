@@ -1,0 +1,312 @@
+-------------------------------------
+/var/log/httpd/ssl_request_log
+-------------------------------------
+
+
+
+
+-------------------------------------
+/opt/python/log/supervisord.log
+-------------------------------------
+2017-11-17 21:06:32,630 CRIT Supervisor running as root (no user in config file)
+2017-11-17 21:06:32,641 INFO RPC interface 'supervisor' initialized
+2017-11-17 21:06:32,641 CRIT Server 'unix_http_server' running without any HTTP authentication checking
+2017-11-17 21:06:32,641 INFO supervisord started with pid 3020
+2017-11-17 21:06:33,643 INFO spawned: 'httpd' with pid 3105
+2017-11-17 21:06:34,728 INFO success: httpd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2017-11-17 21:07:21,505 INFO stopped: httpd (exit status 0)
+2017-11-17 21:07:22,510 INFO spawned: 'httpd' with pid 3446
+2017-11-17 21:07:23,540 INFO success: httpd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+
+
+
+-------------------------------------
+/var/log/httpd/ssl_error_log
+-------------------------------------
+[Fri Nov 17 21:07:22.540265 2017] [ssl:warn] [pid 3446] AH01906: ip-172-31-49-59.ec2.internal:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+[Fri Nov 17 21:07:22.559475 2017] [ssl:warn] [pid 3446] AH01906: ip-172-31-49-59.ec2.internal:443:0 server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+
+
+
+-------------------------------------
+/var/log/httpd/error_log
+-------------------------------------
+[Fri Nov 17 21:06:33.728682 2017] [suexec:notice] [pid 3105] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Fri Nov 17 21:06:33.743256 2017] [http2:warn] [pid 3105] AH10034: The mpm module (prefork.c) is not supported by mod_http2. The mpm determines how things are processed in your server. HTTP/2 has more demands in this regard and the currently selected mpm will just not do. This is an advisory warning. Your server will continue to work, but the HTTP/2 protocol will be inactive.
+[Fri Nov 17 21:06:33.743269 2017] [http2:warn] [pid 3105] AH02951: mod_ssl does not seem to be enabled
+[Fri Nov 17 21:06:33.743691 2017] [lbmethod_heartbeat:notice] [pid 3105] AH02282: No slotmem from mod_heartmonitor
+[Fri Nov 17 21:06:33.745362 2017] [mpm_prefork:notice] [pid 3105] AH00163: Apache/2.4.27 (Amazon) mod_wsgi/3.5 Python/2.7.12 configured -- resuming normal operations
+[Fri Nov 17 21:06:33.745374 2017] [core:notice] [pid 3105] AH00094: Command line: '/usr/sbin/httpd -D FOREGROUND'
+[Fri Nov 17 21:07:21.493543 2017] [mpm_prefork:notice] [pid 3105] AH00169: caught SIGTERM, shutting down
+[Fri Nov 17 21:07:22.540787 2017] [suexec:notice] [pid 3446] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Fri Nov 17 21:07:22.555926 2017] [so:warn] [pid 3446] AH01574: module wsgi_module is already loaded, skipping
+[Fri Nov 17 21:07:22.559582 2017] [http2:warn] [pid 3446] AH10034: The mpm module (prefork.c) is not supported by mod_http2. The mpm determines how things are processed in your server. HTTP/2 has more demands in this regard and the currently selected mpm will just not do. This is an advisory warning. Your server will continue to work, but the HTTP/2 protocol will be inactive.
+[Fri Nov 17 21:07:22.560075 2017] [lbmethod_heartbeat:notice] [pid 3446] AH02282: No slotmem from mod_heartmonitor
+[Fri Nov 17 21:07:22.562855 2017] [mpm_prefork:notice] [pid 3446] AH00163: Apache/2.4.27 (Amazon) OpenSSL/1.0.2k-fips mod_wsgi/3.5 Python/2.7.12 configured -- resuming normal operations
+[Fri Nov 17 21:07:22.562870 2017] [core:notice] [pid 3446] AH00094: Command line: '/usr/sbin/httpd -D FOREGROUND'
+[Fri Nov 17 21:09:38.567974 2017] [:error] [pid 3451] [remote 172.31.10.11:17288] [2017-11-17 21:09:38,565] ERROR in app: Exception on /login [POST]
+[Fri Nov 17 21:09:38.568000 2017] [:error] [pid 3451] [remote 172.31.10.11:17288] Traceback (most recent call last):
+[Fri Nov 17 21:09:38.568003 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]   File "/opt/python/run/venv/local/lib/python2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+[Fri Nov 17 21:09:38.568005 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]     response = self.full_dispatch_request()
+[Fri Nov 17 21:09:38.568008 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]   File "/opt/python/run/venv/local/lib/python2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+[Fri Nov 17 21:09:38.568010 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]     rv = self.handle_user_exception(e)
+[Fri Nov 17 21:09:38.568012 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]   File "/opt/python/run/venv/local/lib/python2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+[Fri Nov 17 21:09:38.568014 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]     reraise(exc_type, exc_value, tb)
+[Fri Nov 17 21:09:38.568016 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]   File "/opt/python/run/venv/local/lib/python2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+[Fri Nov 17 21:09:38.568018 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]     rv = self.dispatch_request()
+[Fri Nov 17 21:09:38.568020 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]   File "/opt/python/run/venv/local/lib/python2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+[Fri Nov 17 21:09:38.568022 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]     return self.view_functions[rule.endpoint](**req.view_args)
+[Fri Nov 17 21:09:38.568024 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]   File "/opt/python/current/app/application.py", line 183, in login
+[Fri Nov 17 21:09:38.568032 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]     user = User.login(form.username.data, form.password.data)
+[Fri Nov 17 21:09:38.568034 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]   File "/opt/python/run/venv/src/parse-rest/parse_rest/user.py", line 93, in login
+[Fri Nov 17 21:09:38.568035 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]     return cls(**User.GET(login_url, username=username, password=passwd))
+[Fri Nov 17 21:09:38.568037 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]   File "/opt/python/run/venv/src/parse-rest/parse_rest/connection.py", line 154, in GET
+[Fri Nov 17 21:09:38.568039 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]     return cls.execute(uri, 'GET', **kw)
+[Fri Nov 17 21:09:38.568041 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]   File "/opt/python/run/venv/src/parse-rest/parse_rest/connection.py", line 140, in execute
+[Fri Nov 17 21:09:38.568043 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]     response = urlopen(request, timeout=CONNECTION_TIMEOUT)
+[Fri Nov 17 21:09:38.568044 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]   File "/usr/lib64/python2.7/urllib2.py", line 154, in urlopen
+[Fri Nov 17 21:09:38.568046 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]     return opener.open(url, data, timeout)
+[Fri Nov 17 21:09:38.568048 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]   File "/usr/lib64/python2.7/urllib2.py", line 429, in open
+[Fri Nov 17 21:09:38.568049 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]     response = self._open(req, data)
+[Fri Nov 17 21:09:38.568051 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]   File "/usr/lib64/python2.7/urllib2.py", line 447, in _open
+[Fri Nov 17 21:09:38.568052 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]     '_open', req)
+[Fri Nov 17 21:09:38.568054 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]   File "/usr/lib64/python2.7/urllib2.py", line 407, in _call_chain
+[Fri Nov 17 21:09:38.568056 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]     result = func(*args)
+[Fri Nov 17 21:09:38.568057 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]   File "/usr/lib64/python2.7/urllib2.py", line 1243, in https_open
+[Fri Nov 17 21:09:38.568059 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]     context=self._context)
+[Fri Nov 17 21:09:38.568061 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]   File "/usr/lib64/python2.7/urllib2.py", line 1200, in do_open
+[Fri Nov 17 21:09:38.568062 2017] [:error] [pid 3451] [remote 172.31.10.11:17288]     raise URLError(err)
+[Fri Nov 17 21:09:38.568064 2017] [:error] [pid 3451] [remote 172.31.10.11:17288] URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:590)>
+
+
+
+-------------------------------------
+/var/log/httpd/access_log
+-------------------------------------
+127.0.0.1 (-) - - [17/Nov/2017:21:07:25 +0000] "GET / HTTP/1.1" 200 3896 "-" "Python-urllib/2.7"
+172.31.10.11 (73.102.46.54) - - [17/Nov/2017:21:09:25 +0000] "GET / HTTP/1.1" 200 3896 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36"
+172.31.10.11 (73.102.46.54) - - [17/Nov/2017:21:09:27 +0000] "GET /login HTTP/1.1" 200 3421 "http://cpweb-test.dftmsmmvpa.us-east-1.elasticbeanstalk.com/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36"
+172.31.10.11 (73.102.46.54) - - [17/Nov/2017:21:09:38 +0000] "POST /login HTTP/1.1" 500 291 "http://cpweb-test.dftmsmmvpa.us-east-1.elasticbeanstalk.com/login" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36"
+172.31.10.11 (73.102.46.54) - - [17/Nov/2017:21:09:38 +0000] "GET /favicon.ico HTTP/1.1" 404 233 "http://cpweb-test.dftmsmmvpa.us-east-1.elasticbeanstalk.com/login" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36"
+
+
+
+-------------------------------------
+/var/log/eb-activity.log
+-------------------------------------
+    Downloading itsdangerous-0.24.tar.gz (46kB)
+  Collecting Jinja2==2.9.6 (from -r /opt/python/ondeck/app/requirements.txt (line 9))
+    Downloading Jinja2-2.9.6-py2.py3-none-any.whl (340kB)
+  Collecting MarkupSafe==1.0 (from -r /opt/python/ondeck/app/requirements.txt (line 10))
+    Downloading MarkupSafe-1.0.tar.gz
+  Collecting mongoengine==0.13.0 (from -r /opt/python/ondeck/app/requirements.txt (line 11))
+    Downloading mongoengine-0.13.0-py2-none-any.whl (97kB)
+  Obtaining parse-rest from git+https://github.com/milesrichardson/ParsePy.git#egg=parse-rest (from -r /opt/python/ondeck/app/requirements.txt (line 12))
+    Cloning https://github.com/milesrichardson/ParsePy.git to /opt/python/run/venv/src/parse-rest
+  Collecting pymongo==3.4.0 (from -r /opt/python/ondeck/app/requirements.txt (line 13))
+    Downloading pymongo-3.4.0-cp27-cp27mu-manylinux1_x86_64.whl (362kB)
+  Collecting pytz==2017.2 (from -r /opt/python/ondeck/app/requirements.txt (line 14))
+    Downloading pytz-2017.2-py2.py3-none-any.whl (484kB)
+  Collecting six==1.10.0 (from -r /opt/python/ondeck/app/requirements.txt (line 15))
+    Downloading six-1.10.0-py2.py3-none-any.whl
+  Collecting Werkzeug==0.12.2 (from -r /opt/python/ondeck/app/requirements.txt (line 16))
+    Downloading Werkzeug-0.12.2-py2.py3-none-any.whl (312kB)
+  Collecting WTForms==2.1 (from -r /opt/python/ondeck/app/requirements.txt (line 17))
+    Downloading WTForms-2.1.zip (553kB)
+  Building wheels for collected packages: blinker, Flask-Mail, itsdangerous, MarkupSafe, WTForms
+    Running setup.py bdist_wheel for blinker: started
+    Running setup.py bdist_wheel for blinker: finished with status 'done'
+    Stored in directory: /root/.cache/pip/wheels/7b/8a/eb/5a4f4444f366c515073db8a129c92d4727ad945e5e64b9e8bd
+    Running setup.py bdist_wheel for Flask-Mail: started
+    Running setup.py bdist_wheel for Flask-Mail: finished with status 'done'
+    Stored in directory: /root/.cache/pip/wheels/b5/f8/fb/a2c4ba26c9e4a56d034b410deea2c3bfb9b1a21fed2e245f76
+    Running setup.py bdist_wheel for itsdangerous: started
+    Running setup.py bdist_wheel for itsdangerous: finished with status 'done'
+    Stored in directory: /root/.cache/pip/wheels/fc/a8/66/24d655233c757e178d45dea2de22a04c6d92766abfb741129a
+    Running setup.py bdist_wheel for MarkupSafe: started
+    Running setup.py bdist_wheel for MarkupSafe: finished with status 'done'
+    Stored in directory: /root/.cache/pip/wheels/88/a7/30/e39a54a87bcbe25308fa3ca64e8ddc75d9b3e5afa21ee32d57
+    Running setup.py bdist_wheel for WTForms: started
+    Running setup.py bdist_wheel for WTForms: finished with status 'done'
+    Stored in directory: /root/.cache/pip/wheels/36/35/f3/7452cd24daeeaa5ec5b2ea13755316abc94e4e7702de29ba94
+  Successfully built blinker Flask-Mail itsdangerous MarkupSafe WTForms
+  Installing collected packages: blinker, click, itsdangerous, MarkupSafe, Jinja2, Werkzeug, Flask, Flask-Mail, six, WTForms, Flask-WTF, pymongo, mongoengine, flask-mongoengine, Flask-PyMongo, parse-rest, pytz
+    Running setup.py develop for parse-rest
+  Successfully installed Flask-0.12.2 Flask-Mail-0.9.1 Flask-PyMongo-0.5.1 Flask-WTF-0.14.2 Jinja2-2.9.6 MarkupSafe-1.0 WTForms-2.1 Werkzeug-0.12.2 blinker-1.4 click-6.7 flask-mongoengine-0.9.3 itsdangerous-0.24 mongoengine-0.13.0 parse-rest pymongo-3.4.0 pytz-2017.2 six-1.10.0
+[2017-11-17T21:07:19.051Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage0/AppDeployPreHook/04configen.py] : Starting activity...
+[2017-11-17T21:07:20.401Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage0/AppDeployPreHook/04configen.py] : Completed activity.
+[2017-11-17T21:07:20.401Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage0/AppDeployPreHook] : Completed activity. Result:
+  Successfully execute hooks in directory /opt/elasticbeanstalk/hooks/appdeploy/pre.
+[2017-11-17T21:07:20.401Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage0/EbExtensionPostBuild] : Starting activity...
+[2017-11-17T21:07:20.785Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage0/EbExtensionPostBuild/Infra-EmbeddedPostBuild] : Starting activity...
+[2017-11-17T21:07:20.786Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage0/EbExtensionPostBuild/Infra-EmbeddedPostBuild] : Completed activity.
+[2017-11-17T21:07:20.800Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage0/EbExtensionPostBuild] : Completed activity.
+[2017-11-17T21:07:20.800Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage0/InfraCleanEbExtension] : Starting activity...
+[2017-11-17T21:07:20.801Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage0/InfraCleanEbExtension] : Completed activity. Result:
+  Cleaned ebextensions subdirectories from /opt/python/ondeck/app.
+[2017-11-17T21:07:20.801Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage0] : Completed activity. Result:
+  Application deployment - Command CMD-Startup stage 0 completed
+[2017-11-17T21:07:20.801Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage1] : Starting activity...
+[2017-11-17T21:07:20.801Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage1/AppDeployEnactHook] : Starting activity...
+[2017-11-17T21:07:20.801Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage1/AppDeployEnactHook/01flip.py] : Starting activity...
+[2017-11-17T21:07:25.441Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage1/AppDeployEnactHook/01flip.py] : Completed activity. Result:
+  httpd: stopped
+  httpd: started
+  httpd                            RUNNING   pid 3446, uptime 0:00:03
+[2017-11-17T21:07:25.441Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage1/AppDeployEnactHook/01stop_xray.sh] : Starting activity...
+[2017-11-17T21:07:27.550Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage1/AppDeployEnactHook/01stop_xray.sh] : Completed activity. Result:
+  Executing: if ( initctl status xray | grep start ); then initctl stop xray; fi
+  xray start/running, process 2254
+  xray stop/waiting
+[2017-11-17T21:07:27.550Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage1/AppDeployEnactHook/02create_pids_for_monitoring.sh] : Starting activity...
+[2017-11-17T21:07:27.649Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage1/AppDeployEnactHook/02create_pids_for_monitoring.sh] : Completed activity. Result:
+  + chmod 0755 /var/run/httpd
+  + /opt/elasticbeanstalk/bin/healthd-track-pidfile --proxy httpd
+  + /opt/elasticbeanstalk/bin/healthd-track-pidfile --name application --location /opt/python/run/supervisord.pid
+[2017-11-17T21:07:27.649Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage1/AppDeployEnactHook/02start_xray.sh] : Starting activity...
+[2017-11-17T21:07:27.749Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage1/AppDeployEnactHook/02start_xray.sh] : Completed activity.
+[2017-11-17T21:07:27.749Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage1/AppDeployEnactHook] : Completed activity. Result:
+  Successfully execute hooks in directory /opt/elasticbeanstalk/hooks/appdeploy/enact.
+[2017-11-17T21:07:27.749Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage1/AppDeployPostHook] : Starting activity...
+[2017-11-17T21:07:27.749Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage1/AppDeployPostHook] : Completed activity. Result:
+  Successfully execute hooks in directory /opt/elasticbeanstalk/hooks/appdeploy/post.
+[2017-11-17T21:07:27.750Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage1/PostInitHook] : Starting activity...
+[2017-11-17T21:07:27.750Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage1/PostInitHook/01processmgrstart.sh] : Starting activity...
+[2017-11-17T21:07:27.754Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage1/PostInitHook/01processmgrstart.sh] : Completed activity. Result:
+  + pgrep supervisord
+  3020
+[2017-11-17T21:07:27.754Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage1/PostInitHook] : Completed activity. Result:
+  Successfully execute hooks in directory /opt/elasticbeanstalk/hooks/postinit.
+[2017-11-17T21:07:27.754Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/StartupStage1] : Completed activity. Result:
+  Application deployment - Command CMD-Startup stage 1 completed
+[2017-11-17T21:07:27.754Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/AddonsAfter] : Starting activity...
+[2017-11-17T21:07:27.754Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/AddonsAfter/ConfigLogRotation] : Starting activity...
+[2017-11-17T21:07:27.754Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/AddonsAfter/ConfigLogRotation/10-config.sh] : Starting activity...
+[2017-11-17T21:07:27.832Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/AddonsAfter/ConfigLogRotation/10-config.sh] : Completed activity. Result:
+  Disabled forced hourly log rotation.
+[2017-11-17T21:07:27.832Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/AddonsAfter/ConfigLogRotation] : Completed activity. Result:
+  Successfully execute hooks in directory /opt/elasticbeanstalk/addons/logpublish/hooks/config.
+[2017-11-17T21:07:27.832Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1/AddonsAfter] : Completed activity.
+[2017-11-17T21:07:27.832Z] INFO  [3177]  - [Application deployment app-5a0b-171117_160435@1] : Completed activity. Result:
+  Application deployment - Command CMD-Startup succeeded
+[2017-11-17T21:09:50.943Z] INFO  [3634]  - [CMD-TailLogs] : Starting activity...
+[2017-11-17T21:09:50.943Z] INFO  [3634]  - [CMD-TailLogs/AddonsBefore] : Starting activity...
+[2017-11-17T21:09:50.943Z] INFO  [3634]  - [CMD-TailLogs/AddonsBefore] : Completed activity.
+[2017-11-17T21:09:50.943Z] INFO  [3634]  - [CMD-TailLogs/TailLogs] : Starting activity...
+[2017-11-17T21:09:50.943Z] INFO  [3634]  - [CMD-TailLogs/TailLogs/TailLogs] : Starting activity...
+
+
+
+-------------------------------------
+/var/log/httpd/ssl_access_log
+-------------------------------------
+
+
+
+
+-------------------------------------
+/var/log/eb-commandprocessor.log
+-------------------------------------
+[2017-11-17T21:06:18.334Z] DEBUG [2826]  : Retrieving metadata for key: AWS::ElasticBeanstalk::Ext||ManifestFileS3Key..
+[2017-11-17T21:06:18.579Z] INFO  [2826]  : Finding latest manifest from bucket 'elasticbeanstalk-us-east-1-738176826838' with prefix 'resources/environments/e-bukjvvkdwt/_runtime/versions/manifest_'.
+[2017-11-17T21:06:18.694Z] INFO  [2826]  : Found manifest with key 'resources/environments/e-bukjvvkdwt/_runtime/versions/manifest_1510952693532'.
+[2017-11-17T21:06:18.709Z] INFO  [2826]  : Updated manifest cache: deployment ID 1 and serial 1.
+[2017-11-17T21:06:18.709Z] DEBUG [2826]  : Loaded definition of Command CMD-PreInit.
+[2017-11-17T21:06:18.709Z] INFO  [2826]  : Executing Initialization
+[2017-11-17T21:06:18.709Z] INFO  [2826]  : Executing command: CMD-PreInit...
+[2017-11-17T21:06:18.709Z] INFO  [2826]  : Executing command CMD-PreInit activities...
+[2017-11-17T21:06:18.709Z] DEBUG [2826]  : Setting environment variables..
+[2017-11-17T21:06:18.709Z] INFO  [2826]  : Running AddonsBefore for command CMD-PreInit...
+[2017-11-17T21:06:25.853Z] DEBUG [2826]  : Running stages of Command CMD-PreInit from stage 0 to stage 0...
+[2017-11-17T21:06:25.853Z] INFO  [2826]  : Running stage 0 of command CMD-PreInit...
+[2017-11-17T21:06:25.853Z] DEBUG [2826]  : Loaded 2 actions for stage 0.
+[2017-11-17T21:06:25.853Z] INFO  [2826]  : Running 1 of 2 actions: DownloadSourceBundle...
+[2017-11-17T21:06:26.935Z] INFO  [2826]  : Running 2 of 2 actions: PreInitHook...
+[2017-11-17T21:06:32.367Z] INFO  [2826]  : Running AddonsAfter for command CMD-PreInit...
+[2017-11-17T21:06:32.368Z] INFO  [2826]  : Command CMD-PreInit succeeded!
+[2017-11-17T21:06:32.368Z] INFO  [2826]  : Command processor returning results: 
+{"status":"SUCCESS","api_version":"1.0","results":[{"status":"SUCCESS","msg":"","returncode":0,"events":[]}]}
+[2017-11-17T21:07:03.408Z] DEBUG [3177]  : Reading config file: /etc/elasticbeanstalk/.aws-eb-stack.properties
+[2017-11-17T21:07:03.408Z] DEBUG [3177]  : Checking if the command processor should execute...
+[2017-11-17T21:07:03.410Z] DEBUG [3177]  : Checking whether the command is applicable to instance (i-0b487a56c0310b0ab)..
+[2017-11-17T21:07:03.410Z] INFO  [3177]  : Command is applicable to this instance (i-0b487a56c0310b0ab)..
+[2017-11-17T21:07:03.410Z] DEBUG [3177]  : Checking if the received command stage is valid..
+[2017-11-17T21:07:03.410Z] INFO  [3177]  : No stage_num in command. Valid stage..
+[2017-11-17T21:07:03.410Z] INFO  [3177]  : Received command CMD-Startup: {"execution_data":"{\"leader_election\":\"true\"}","instance_ids":["i-0b487a56c0310b0ab"],"command_name":"CMD-Startup","api_version":"1.0","resource_name":"AWSEBAutoScalingGroup","request_id":"f1c15e38-cbda-11e7-8634-85c615fbd7ad"}
+[2017-11-17T21:07:03.410Z] INFO  [3177]  : Command processor should execute command.
+[2017-11-17T21:07:03.410Z] DEBUG [3177]  : Storing current stage..
+[2017-11-17T21:07:03.410Z] DEBUG [3177]  : Stage_num does not exist. Not saving null stage. Returning..
+[2017-11-17T21:07:03.410Z] DEBUG [3177]  : Reading config file: /etc/elasticbeanstalk/.aws-eb-stack.properties
+[2017-11-17T21:07:03.410Z] DEBUG [3177]  : Retrieving metadata for key: AWS::ElasticBeanstalk::Ext||_ContainerConfigFileContent||commands..
+[2017-11-17T21:07:03.411Z] DEBUG [3177]  : Retrieving metadata for key: AWS::ElasticBeanstalk::Ext||_API||_Commands..
+[2017-11-17T21:07:03.411Z] INFO  [3177]  : Found enabled addons: ["logstreaming", "logpublish"].
+[2017-11-17T21:07:03.412Z] INFO  [3177]  : Updating Command definition of addon logstreaming.
+[2017-11-17T21:07:03.412Z] INFO  [3177]  : Updating Command definition of addon logpublish.
+[2017-11-17T21:07:03.412Z] DEBUG [3177]  : Refreshing metadata...
+[2017-11-17T21:07:03.846Z] DEBUG [3177]  : Refreshed environment metadata.
+[2017-11-17T21:07:03.847Z] INFO  [3177]  : Recreated directory /opt/elasticbeanstalk/deploy/configuration/.
+[2017-11-17T21:07:03.847Z] DEBUG [3177]  : Retrieving metadata for key: AWS::ElasticBeanstalk::Ext||_AppSourceUrlFileContent||url..
+[2017-11-17T21:07:03.847Z] INFO  [3177]  : Created appsource url file at /opt/elasticbeanstalk/deploy/configuration/appsourceurl.
+[2017-11-17T21:07:03.847Z] DEBUG [3177]  : Retrieving metadata for key: AWS::ElasticBeanstalk::Ext||_ContainerConfigFileContent..
+[2017-11-17T21:07:03.849Z] INFO  [3177]  : Created container config file at /opt/elasticbeanstalk/deploy/configuration/containerconfiguration.
+[2017-11-17T21:07:03.849Z] DEBUG [3177]  : Retrieving metadata for key: AWS::ElasticBeanstalk::Ext||_ContainerConfigFileContent||commands..
+[2017-11-17T21:07:03.850Z] DEBUG [3177]  : Retrieving metadata for key: AWS::ElasticBeanstalk::Ext||_API||_Commands..
+[2017-11-17T21:07:03.850Z] INFO  [3177]  : Found enabled addons: ["logstreaming", "logpublish"].
+[2017-11-17T21:07:03.851Z] INFO  [3177]  : Updating Command definition of addon logstreaming.
+[2017-11-17T21:07:03.851Z] INFO  [3177]  : Updating Command definition of addon logpublish.
+[2017-11-17T21:07:03.851Z] DEBUG [3177]  : Loaded definition of Command CMD-Startup.
+[2017-11-17T21:07:03.851Z] INFO  [3177]  : Executing Application deployment
+[2017-11-17T21:07:03.852Z] INFO  [3177]  : Executing command: CMD-Startup...
+[2017-11-17T21:07:03.852Z] INFO  [3177]  : Executing command CMD-Startup activities...
+[2017-11-17T21:07:03.852Z] DEBUG [3177]  : Setting environment variables..
+[2017-11-17T21:07:03.852Z] INFO  [3177]  : Running AddonsBefore for command CMD-Startup...
+[2017-11-17T21:07:03.969Z] DEBUG [3177]  : Running stages of Command CMD-Startup from stage 0 to stage 1...
+[2017-11-17T21:07:03.969Z] INFO  [3177]  : Running stage 0 of command CMD-Startup...
+[2017-11-17T21:07:03.969Z] INFO  [3177]  : Running leader election...
+[2017-11-17T21:07:04.349Z] INFO  [3177]  : Instance is Leader.
+[2017-11-17T21:07:04.349Z] DEBUG [3177]  : Loaded 7 actions for stage 0.
+[2017-11-17T21:07:04.349Z] INFO  [3177]  : Running 1 of 7 actions: HealthdLogRotation...
+[2017-11-17T21:07:04.354Z] INFO  [3177]  : Running 2 of 7 actions: HealthdHTTPDLogging...
+[2017-11-17T21:07:04.354Z] INFO  [3177]  : Running 3 of 7 actions: HealthdNginxLogging...
+[2017-11-17T21:07:04.355Z] INFO  [3177]  : Running 4 of 7 actions: EbExtensionPreBuild...
+[2017-11-17T21:07:10.393Z] INFO  [3177]  : Running 5 of 7 actions: AppDeployPreHook...
+[2017-11-17T21:07:20.401Z] INFO  [3177]  : Running 6 of 7 actions: EbExtensionPostBuild...
+[2017-11-17T21:07:20.800Z] INFO  [3177]  : Running 7 of 7 actions: InfraCleanEbExtension...
+[2017-11-17T21:07:20.801Z] INFO  [3177]  : Running stage 1 of command CMD-Startup...
+[2017-11-17T21:07:20.801Z] DEBUG [3177]  : Loaded 3 actions for stage 1.
+[2017-11-17T21:07:20.801Z] INFO  [3177]  : Running 1 of 3 actions: AppDeployEnactHook...
+[2017-11-17T21:07:27.749Z] INFO  [3177]  : Running 2 of 3 actions: AppDeployPostHook...
+[2017-11-17T21:07:27.750Z] INFO  [3177]  : Running 3 of 3 actions: PostInitHook...
+[2017-11-17T21:07:27.754Z] INFO  [3177]  : Running AddonsAfter for command CMD-Startup...
+[2017-11-17T21:07:27.832Z] INFO  [3177]  : Command CMD-Startup succeeded!
+[2017-11-17T21:07:27.832Z] INFO  [3177]  : Command processor returning results: 
+{"status":"SUCCESS","api_version":"1.0","results":[{"status":"SUCCESS","msg":"","returncode":0,"events":[]}]}
+[2017-11-17T21:09:50.938Z] DEBUG [3634]  : Reading config file: /etc/elasticbeanstalk/.aws-eb-stack.properties
+[2017-11-17T21:09:50.938Z] DEBUG [3634]  : Checking if the command processor should execute...
+[2017-11-17T21:09:50.939Z] DEBUG [3634]  : Checking whether the command is applicable to instance (i-0b487a56c0310b0ab)..
+[2017-11-17T21:09:50.939Z] INFO  [3634]  : Command is applicable to this instance (i-0b487a56c0310b0ab)..
+[2017-11-17T21:09:50.939Z] DEBUG [3634]  : Checking if the received command stage is valid..
+[2017-11-17T21:09:50.939Z] INFO  [3634]  : No stage_num in command. Valid stage..
+[2017-11-17T21:09:50.939Z] INFO  [3634]  : Received command CMD-TailLogs: {"execution_data":"{\"aws_access_key_id\":\"ASIAJXDHZTQV3OELS27Q\",\"signature\":\"+AmOs0mE8zfalJh8ZtHd\\\/WdVMkQ=\",\"security_token\":\"FQoDYXdzEJb\\\/\\\/\\\/\\\/\\\/\\\/\\\/\\\/\\\/\\\/wEaDMuLpnQjrsbfk9brTyLcA5lMz12SqIsEVOTWfqgnNxIX\\\/5T\\\/SfPy2JrLVvNcP7AmMOpIrzkPVWoBtlKzxtmC804BvubcnuyC2d41KWg6DJ9npinwZJbj9QZBySldmO0Dwz05F5FuhCmatSZu\\\/GeR+w6Uv\\\/cpEcuh6X70WPyigIQdUHaa0V8yRM1uW1znw1RLqdp5sPB+Gr2rDJqXw+ZfGSQeaxJ0XoJqTtysSHW7+xWzki+l\\\/lD\\\/ac6K0gRN40CWcKSRIilZ7UjAk2eeepTs4UCPRTz6PhW2201iTF5R7JMZerO5Hzqkr1BpFokZlpv\\\/Spa5ljqXggv72dXR2ipFnOl8yKztmjWtJT9yuBrPSkJ9jH9LGuGcfvTRi9KSWYSqPBm0UH6Sd36poc5EGazp+PlD0wyEagCZGbSFJ8py\\\/4neNrH6koN0NkJPwqAHBicGH\\\/baT7fi8Q2v3rUahhatWVahtgA5+XJKbtJbt647X5zmxtV+ZtjTZD5tLBk4nZThEzvXCOcKQqJEenrFNUzMkOC+waqjOs9IEa56hgrpH2\\\/MqsQPGdzdbmmYZdwpgCbJN\\\/51+4Y+JoaaT0DcA2c1bjyZy5C3JpEvrOicZGk6MkBUMoioSwmPq8PqEReMFSn44Fk1Z2Im05bivUmrKLWevdAF|NzIuMjEuMjE3LjY0\",\"policy\":\"eyJleHBpcmF0aW9uIjoiMjAxNy0xMS0xN1QyMTozOTo0OS4zOTNaIiwiY29uZGl0aW9ucyI6W1sic3RhcnRzLXdpdGgiLCIkeC1hbXotbWV0YS10aW1lX3N0YW1wIiwiIl0sWyJzdGFydHMtd2l0aCIsIiR4LWFtei1tZXRhLXB1Ymxpc2hfbWVjaGFuaXNtIiwiIl0sWyJzdGFydHMtd2l0aCIsIiRrZXkiLCJyZXNvdXJjZXNcL2Vudmlyb25tZW50c1wvbG9nc1wvIl0sWyJzdGFydHMtd2l0aCIsIiR4LWFtei1tZXRhLWJhdGNoX2lkIiwiIl0sWyJzdGFydHMtd2l0aCIsIiR4LWFtei1tZXRhLWZpbGVfbmFtZSIsIiJdLFsic3RhcnRzLXdpdGgiLCIkeC1hbXotc2VjdXJpdHktdG9rZW4iLCIiXSxbInN0YXJ0cy13aXRoIiwiJENvbnRlbnQtVHlwZSIsIiJdLFsiZXEiLCIkYnVja2V0IiwiZWxhc3RpY2JlYW5zdGFsay11cy1lYXN0LTEtNzM4MTc2ODI2ODM4Il0sWyJlcSIsIiRhY2wiLCJwcml2YXRlIl1dfQ==\"}","instance_ids":["i-0b487a56c0310b0ab"],"data":"a580d71f-cbdb-11e7-b971-392074d65e14","command_name":"CMD-TailLogs","api_version":"1.0","resource_name":"AWSEBAutoScalingGroup","request_id":"a580d71f-cbdb-11e7-b971-392074d65e14"}
+[2017-11-17T21:09:50.939Z] INFO  [3634]  : Command processor should execute command.
+[2017-11-17T21:09:50.939Z] DEBUG [3634]  : Storing current stage..
+[2017-11-17T21:09:50.939Z] DEBUG [3634]  : Stage_num does not exist. Not saving null stage. Returning..
+[2017-11-17T21:09:50.940Z] DEBUG [3634]  : Reading config file: /etc/elasticbeanstalk/.aws-eb-stack.properties
+[2017-11-17T21:09:50.940Z] DEBUG [3634]  : Retrieving metadata for key: AWS::ElasticBeanstalk::Ext||_ContainerConfigFileContent||commands..
+[2017-11-17T21:09:50.940Z] DEBUG [3634]  : Retrieving metadata for key: AWS::ElasticBeanstalk::Ext||_API||_Commands..
+[2017-11-17T21:09:50.941Z] INFO  [3634]  : Found enabled addons: ["logstreaming", "logpublish"].
+[2017-11-17T21:09:50.942Z] INFO  [3634]  : Updating Command definition of addon logstreaming.
+[2017-11-17T21:09:50.942Z] INFO  [3634]  : Updating Command definition of addon logpublish.
+[2017-11-17T21:09:50.942Z] DEBUG [3634]  : Loaded definition of Command CMD-TailLogs.
+[2017-11-17T21:09:50.942Z] INFO  [3634]  : Executing CMD-TailLogs
+[2017-11-17T21:09:50.943Z] INFO  [3634]  : Executing command: CMD-TailLogs...
+[2017-11-17T21:09:50.943Z] INFO  [3634]  : Executing command CMD-TailLogs activities...
+[2017-11-17T21:09:50.943Z] DEBUG [3634]  : Setting environment variables..
+[2017-11-17T21:09:50.943Z] INFO  [3634]  : Running AddonsBefore for command CMD-TailLogs...
+[2017-11-17T21:09:50.943Z] DEBUG [3634]  : Running stages of Command CMD-TailLogs from stage 0 to stage 0...
+[2017-11-17T21:09:50.943Z] INFO  [3634]  : Running stage 0 of command CMD-TailLogs...
+[2017-11-17T21:09:50.943Z] DEBUG [3634]  : Loaded 1 actions for stage 0.
+[2017-11-17T21:09:50.943Z] INFO  [3634]  : Running 1 of 1 actions: TailLogs...
+
+
+

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}
+		<div class = "row">
+			<div class="col-sm-12">
+			  <h2 style = "text-align: center;">Select and Edit Images from Videos</h2>
+			</div>
+		</div>
+{% endblock %}
+
+{% block visuals %}
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid" style="background-color: #ffffff">
+	<div class = row>
+		<div class="col-sm-12"> 
+
+	<form action = {{url_for('landing', pk=pk)}} method = post enctype=multipart/form-data>
+		 <fieldset>
+			<div class = "row">
+				
+				{{ form.hidden_tag() }}
+				<div class = "col-sm-6" style = font-size:20px; font-weight:bold; margin-left:150px;>
+                   <h2>UploadedVideo</h2>
+				   {{ form.videoName.label }}  {{ form.videoName }} <br> 
+	  				{% for message in form.videoName.errors %}
+		 				{{ message }}<br>
+	  				{% endfor %}
+				   {{ form.chooseVideo.label }}  {{ form.chooseVideo }} <br>
+                   {{ form.timeTarget.label }} {{form.timeTarget }} {{ form.go }} <br>
+	  				{% for message in form.timeTarget.errors %}
+		 				{{ message }}<br>
+	  				{% endfor %}
+                    {% if video %} 
+                        <video width="640" height="360" controls>
+                          <source src={{ video.videoFileName.url }} alt={{ video.videoName }} type="video/mp4">
+                        </video>
+                    <br>
+                    {% endif %}
+
+                    {{ form.saveVideo }} <br>
+                 
+				</div>
+				<div class = "col-sm-6" style = font-size:20px; font-weight:bold; margin-left:150px;>
+                   <h2>Selected Image</h2>
+				   {{ form.imageName.label }} {{ form.imageName }}
+	  				{% for message in form.imageName.errors %}
+		 				{{ message }}<br>
+	  				{% endfor %}
+				   <br>
+				   {{ form.chooseImage.label }} {{ form.chooseImage }}
+				   <br>
+                   {{ form.imageOptions.label }} {{ form.imageOptions }} {{ form.execute }} 
+                    {% if image %}
+                   <br>
+                    <img src={{ image.imageFileName.url }} class="img-rounded" alt={{image.imageName }} width="640" height="360"> 
+                   <br>
+                    {% endif %}
+                     {{ form.saveImage }} <br>
+				</div>
+			</div>
+    
+		 </fieldset>
+	</form>
+	</div>
+</div>
+{% endblock %}
+
+

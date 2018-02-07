@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+   
+      <h2 style = "text-align: center;">User Data</h2>
+
+      <form action =  {{url_for('settings')}}  method = post enctype=multipart/form-datat>
+         <fieldset>
+            <legend>Account Settings</legend>
+            {{ form.hidden_tag() }}
+            
+            <div style = font-size:20px; font-weight:bold; margin-left:150px;>
+               {{ form.email.label }}<br>
+               {{ form.email }}<br>
+			  {% for message in form.email.errors %}
+				 {{ message }}<br>
+			  {% endfor %}
+                {{ form.pwChange }}
+            </div>
+         </fieldset>
+      </form>
+      
+{% endblock %}

@@ -1,0 +1,28 @@
+import argparse
+import BaseHTTPServer
+import cgi
+import logging
+import os
+import time
+import sys
+import ctypes
+import csv
+import collections
+from ctypes import *
+homepath = os.path.abspath('.')
+filepath = homepath + '/libCPDetect_DLL_CGCC.so'
+lib1 = cdll.LoadLibrary(filepath) # change to "." i/o ..ubuntu for local
+lib1.mapPixies.argtypes = [ctypes.c_char_p]
+lib1.mapPixies.restype = c_char_p
+
+lib2 = cdll.LoadLibrary("./libCPWriteToParse_DLL.so") # change to "." i/o ..ubuntu for local
+lib2.readPixieFile.argtypes = [ctypes.c_char_p]
+lib2.readPixieFile.restype = c_char_p 
+
+homepath = os.path.abspath('.')
+
+vidpath = homepath + '/videofile21122017182351.mp4'
+
+vidpath = homepath + '/videofile13122017123423.mp4'
+
+postResponse = lib1.mapPixies(vidpath)

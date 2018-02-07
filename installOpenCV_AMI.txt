@@ -1,0 +1,41 @@
+sudo yum install git cmake gcc-c++ numpy python-devel 
+sudo pip install --upgrade pip
+sudo ln -rs /usr/local/bin/pip /usr/bin/
+wget https://pypi.python.org/packages/18/eb/707897ab7c8ad15d0f3c53e971ed8dfb64897ece8d19c64c388f44895572/numpy-1.11.1-cp27-cp27mu-manylinux1_x86_64.whl
+sudo pip install numpy-1.11.1-cp27-cp27mu-manylinux1_x86_64.whl 
+git clone https://github.com/Itseez/opencv.git
+cd opencv
+git checkout 3.1.0
+mkdir build
+cd build
+cmake .. -DBUILD_opencv_python2=ON
+make -j4
+sudo make install
+echo 'export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages/:/usr/local/lib/python2.7/dist-packages/'>>~/.bashrc;. ~/.bashrc
+python -c 'import cv2; print "cv2 imported"
+
+export LD_LIBRARY_PATH=/usr/local/lib
+
+sudo yum install curl-devel
+
+# install ffmpeg
+# become root user
+cd /usr/local/bin
+mkdir ffmpeg
+cd ffmpeg
+# get a static build
+wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz
+
+#unzip it
+tar -xf ffmpeg-release-64bit-static.tar.xz 
+
+# make it available everywhere
+ ln -s /usr/local/bin/ffmpeg/ffmpeg-3.4.1-64bit-static/ffmpeg /usr/bin/ffmpeg
+
+# go back to being user apps
+exit 
+sudo su apps
+
+# verify it is OK
+ffmpeg -version
+

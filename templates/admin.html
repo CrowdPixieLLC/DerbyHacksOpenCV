@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}
+		<div class = "row">
+			<div class="col-sm-12">
+			  <h2 style = "text-align: center;">Aministration Main</h2>
+			</div>
+		</div>
+{% endblock %}
+
+{% block leftnav %}
+	{{super()}}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid" style="background-color: #FFC72C">
+	<div class = row>
+		<div class="col-sm-10"> 
+
+	<form action = {{url_for('admin', pk=pk)}} method = post enctype=multipart/form-data>
+		 <fieldset>
+			<div class = "row">
+				<legend>Directors List</legend>
+				{{ form.hidden_tag() }}
+				<div class = "col-sm-7">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>Face</th>
+									<th>Name</th>
+									<th>Email</th>
+									<th>Role</th>
+									<th>Last Event</th>
+									<th>Last Active Date</th>
+								</tr>
+							</thead>
+							<tbody> 
+							{% for director in directorList %}
+                                <tr>
+                                {% if director.picture %}
+						  		    <td> <img src={{ director.picture.url }} class="img-rounded" alt={{director.firstName + "picture"}} width="45" height="45"> </td>
+                                {% else %}
+                                    <td> </td>
+                                {% endif %}				
+									<td> <a href={{url_for('admin', pk = director.objectId)}}> {{director.firstName}} </a> </td>
+									<td> {{director.email}} </td>
+									<td> {{director.roles[0]}} </td>
+									<td> {{director.events.eventName}} </td>
+									<td> {{director.lastActive}} </td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+
+				</div>
+				<div class = "col-sm-3">
+					<legend>Directors Details</legend>
+				    <div>
+				       {{ form.userData.firstName.label }}<br>
+				       {{ form.userData.firstName }}<br>      
+						{% for message in form.userData.firstName.errors %}
+				 			{{ message }}<br>
+			  			{% endfor %}
+
+				       {{ form.userData.lastName.label }}<br>
+				       {{ form.userData.lastName }}<br>
+					  {% for message in form.userData.lastName.errors %}
+						{{ message }}<br>
+					  {% endfor %}     
+				       
+				       {{ form.userData.addressLine1.label }}<br>
+				       {{ form.userData.addressLine1 }}<br>
+		 			  {% for message in form.userData.addressLine1.errors %}
+						 {{ message }}<br>
+					  {% endfor %}
+
+				       {{ form.userData.addressLine2.label }}<br>
+				       {{ form.userData.addressLine2 }}<br> 
+
+				       {{ form.userData.email.label }}<br>
+				       {{ form.userData.email }}<br>
+					  {% for message in form.userData.email.errors %}
+						 {{ message }}<br>
+					  {% endfor %}
+
+				       {{ form.verifiedName.label }}<br>
+				       {{ form.verifiedName.data }}<br>
+				       
+				       {{ form.userData.city.label }}<br>
+				       {{ form.userData.city }}<br>
+					  {% for message in form.userData.city.errors %}
+						 {{ message }}<br>
+					  {% endfor %}
+				       
+				       {{ form.userData.state.label }}<br>
+				       {{ form.userData.state }}<br>
+					  {% for message in form.userData.state.errors %}
+						 {{ message }}<br>
+					  {% endfor %}
+
+				       {{ form.userData.zipcode.label }}<br>
+				       {{ form.userData.zipcode }}<br>
+					  {% for message in form.userData.zipcode.errors %}
+						 {{ message }}<br>
+					  {% endfor %}
+
+				       {{ form.roles.label }}<br>
+				       {{ form.roles }}<br>
+				    </div>
+				</div>
+			</div>
+			<div class = "row">
+				<div class = "col-sm-2">
+
+				</div>			
+				<div class = "col-sm-4">
+					{{ form.update }}
+				</div>
+				<div class = "col-sm-4">
+				</div>
+			</div>          
+		 </fieldset>
+	</form>
+	</div>
+</div>
+{% endblock %}

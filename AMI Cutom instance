@@ -1,0 +1,5 @@
+Custom AMI for EBS environment (python 2.7.12) N Virginia
+
+ami-e84bf392
+
+aws-elasticbeanstalk-amzn-2017.09.1.x86_64-python27-pv-201711112027 - ami-e84bf392

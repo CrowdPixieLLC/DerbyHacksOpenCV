@@ -1,0 +1,24 @@
+# nginx config changes
+
+user ubuntu i/o 'www'
+
+added
+        server_names_hash_bucket_size 128;
+        client_max_body_size 5m;
+
+remove "default" file from /etc/nginx/sites-enabled
+
+create symlink to /etc/nginx/sites-available/CPWebFlask (i.e. "ln -s /etc/nginx/sites-available/CPWebFlask /etc/nginx/sites-enabled/CPWebFlask")
+
+# content of CPWebFlask 
+
+server {
+    listen 80;
+    server_name ec2-35-169-59-242.compute-1.amazonaws.com; # note: this is the public IP of the website
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/ubuntu/CPWebFlask/cpwebflask.sock;
+    }
+}
+

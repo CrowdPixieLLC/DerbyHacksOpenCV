@@ -1,0 +1,63 @@
+# instructions for building an EC2 instance that runs the CPServer Flask App
+
+begin with a standard AMI instance for python 2.7
+
+Use the CP Server Standard Security Group
+
+Do the installOpenCV_AMI procedure
+
+create a user apps as:
+
+sudo /usr/sbin/useradd apps
+
+sudo su apps
+
+cd ~
+
+exit
+
+Install virtualenvwrapper
+
+sudo easy_install pip
+sudo pip install virtualenvwrapper
+sudo su apps
+cd
+vi .bashrc
+
+add into .bashrc 
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+
+export LD_LIBRARY_PATH=/usr/local/lib
+
+source /usr/local/bin/virtualenvwrapper.sh
+
+. .bashrc
+
+mkvirtualenv cpflask
+
+git clone https://github.com/CrowdPixieLLC/CPWebFlask.git
+
+cd CPWebFlask
+
+pip install -r requirements.txt
+
+cd ..
+
+git clone https://github.com/CrowdPixieLLC/CP_WriteToParse.git
+
+git clone https://github.com/CrowdPixieLLC/CP_Detect_Library.git
+
+complile the libraries per build_for_CPWriteToParse and build_for_CPDetect
+
+
+install nginx
+
+sudo /etc/rc.d/init.d/nginx start
+
+gunicorn application:app -b localhost:8000 &
+
+nginx needs to have client_file_size set to >3M
+
+nginx needs to have ownership of the nginx directory in 
+
