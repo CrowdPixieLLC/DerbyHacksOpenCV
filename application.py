@@ -88,7 +88,31 @@ app.secret_key = 'l\xe2\xdb\x87\xcc\xfc\xc5O\xe7v\x12\xac\xff%\xe6\xa4k\xd2\x12S
 s = URLSafeTimedSerializer(app.secret_key)
 
 
-@app.route('/<pk>', methods = ['GET', 'POST'])
+@app.route('/', methods = ['GET','POST'])
+def main():
+    form = LoginForm()
+    if 'username' in session:
+        form = EditForm()
+        user = User.Query.get(username=session['username'])
+        try:
+            test = user.storedStatus
+        except AttributeError:
+            test = {'videoStatus': 'noVideo','imageStatus': 'noImage', 'videoId': 'None', 'imageId': 'None'}
+        if request.method == 'GET':
+            if test['videoStatus'] == 'videoSaved':
+                uploadedVideo = UploadedVideo.Query.get(objectId=test['videoId'])
+            else:
+                uploadedVideo = createDefaultUploadedVideo()
+            if test['imageStatus'] == 'imageSaved':
+                storedImage = StoredImage.Query.get(objectId=test['imageId'])
+            else:
+                storedImage = createDefaultStoredImage()
+        return render_template('landing.html', video=uploadedVideo, image = storedImage, form=form) 
+    else:
+        return render_template('login.html', form=form)        
+
+
+@app.route('/landing/<pk>', methods = ['GET', 'POST'])
 def landing(pk):
     form = LoginForm()
     if 'username' in session:
@@ -124,7 +148,8 @@ def landing(pk):
                     test = saveImage(form.data, test)
                 if form.go.data:
                     test = advanceToTime(form.data, test)
-                if form.selectFrame.data:
+                    framePreview = StoredImage.Query.get(objectId=test['frameImage'])
+                if form.storeFrame.data:
                     test = createImage(form.data, test)
                 if form.execute.data:
                     test = processImage(form.data, test)
@@ -141,7 +166,12 @@ def landing(pk):
             else:
                 uploadedVideo = createDefaultUploadedVideo()
                 storedImage = createDefaultStoredImage()
-        return render_template('landing.html', video=uploadedVideo, image = storedImage, form=form) 
+        if test['frameVideo'] and test['videoId']:
+            if test['frameVideo'] == test['videoId']:
+                framePreview = StoredImage.Query.get(objectId=test['frameImage'])
+        else:
+            framePreview = None
+        return render_template('landing.html', video=uploadedVideo, image = storedImage, form=form, framePreview=framePreview) 
     else:
         return render_template('login.html', form=form)
 
@@ -352,6 +382,38 @@ def allowed_video_filename(filename):
 def allowed_image_filename(filename):
     return '.' in filename and filename.rsplit('.',1)[1].lower() in ALLOWED_IMAGE_EXTENSIONS
 
+def advanceToTime(form, test):
+    homepath = os.path.abspath('.')
+    uploadedVideo = UploadedVideo.Query.get(objectId=test['videoId'])
+    capture = url_to_videoCapture(uploadedVideo.videoFileName.url)
+    targetTime = form['timeTarget']
+    frameCount = capture.get(cv2.CAP_PROP_FRAME_COUNT)
+    frameRate = capture.get(cv2.CAP_PROP_FPS)
+    videoDuration = frameCount/frameRate
+    if targetTime > videoDuration:
+        targetFrame = frameCount - 1
+    else:
+        targetFrame = int(float(targetTime) * frameRate)
+    capture.set(cv2.CAP_PROP_POS_FRAMES, targetFrame)
+    image = capture.read()
+    if image[0]:
+        frameImage = image[1]
+    else:
+        frameImage = cv2.imread(homepath + '/static/errorImage.jpg')
+    fileName = 'frame' + str(targetFrame) + uploadedVideo.videoName
+    fileName = fileName[0:len(fileName)- 3] + 'jpg'
+    tmppath = homepath + '/temp/' + fileName
+    cv2.imwrite(tmppath, frameImage)
+    imageFile = open(tmppath, "r")
+    image_data = imageFile.read()
+    imageFile.close()
+    capture.release()
+    frame = createStoredImage(fileName, image_data)
+    frame.save()
+    test['frameImage'] = frame.objectId
+    test['frameVideo'] = test['videoId']
+    return test
+
 
 def saveVideo(form, test):
     filename = form['chooseVideo'].filename
@@ -400,19 +462,20 @@ def createStoredImage(filename, image_data):
     imageWidth = imageCapture.shape[1]
     imageHeight = imageCapture.shape[0]
     preview = cv2.resize(imageCapture, (128,72),interpolation = cv2.INTER_AREA)
-    imageName = "defaultImageThumb.jpg"
-    tmpThumbPath = homepath + '/temp/defaultImageThumb.jpg'
+    nameOnly = nameOnly[0:len(nameOnly)-4]
+    thumbName = nameOnly + "ImageThumb.jpg"
+    tmpThumbPath = homepath + '/temp/' + thumbName
     cv2.imwrite(tmpThumbPath, preview)
     previewFile = open(tmpThumbPath, 'r')
     previewData = previewFile.read()
-    newThumbName = "defaultImageThumb.jpg"
+    newThumbName = thumbName
     newThumbFile = File(newThumbName, previewData, 'image/jpg')
     newThumbFile.save()
-    newImageName = "defaultImage.jpg"
+    newImageName = nameOnly + "Image.jpg"
     newImageFile = File(newImageName, imageData, 'image/jpg')
     newImageFile.save()
     user = User.Query.get(username=session['username'])
-    defaultImage = StoredImage(imageName="defaultImage", author=user.username, imageFileName = newImageFile, previewFileName= newThumbFile, height = imageHeight, width = imageWidth)
+    defaultImage = StoredImage(imageName=newImageName, author=user.username, imageFileName = newImageFile, previewFileName= newThumbFile, height = imageHeight, width = imageWidth)
     return defaultImage
 
 def createUploadedVideo(filename, video_data):
@@ -440,7 +503,7 @@ def createUploadedVideo(filename, video_data):
     if preview[0]:
         preview = cv2.resize(preview[1], (128,72),interpolation = cv2.INTER_AREA)
     else:
-        errorFileName = homepath + 'temp/errorPreview.jpg'
+        errorFileName = homepath + 'temp/noPreview.jpg'
         preview = cv2.imread(errorFileName)
     videoPreviewName = nameOnly + "Preview.jpg"
     tmpPreviewPath = homepath + '/temp/' + videoPreviewName
@@ -478,7 +541,7 @@ def createDefaultUploadedVideo():
     if preview[0]:
         preview = cv2.resize(preview[1], (128,72),interpolation = cv2.INTER_AREA)
     else:
-        errorFileName = homepath + 'temp/errorPreview.jpg'
+        errorFileName = homepath + 'temp/noPreview.jpg'
         preview = cv2.imread(errorFileName)
     videoPreviewName = "defaultPreview.jpg"
     tmpPreviewPath = homepath + '/temp/defaultPreview.jpg'
@@ -541,6 +604,19 @@ def url_to_image(url):
     image = np.asarray(bytearray(resp.read()), dtype="uint8")
     image = cv2.imdecode(image, cv2.IMREAD_COLOR)
     return image
+
+def url_to_videoCapture(url):
+    myopener = MyOpener()
+    resp = myopener.open(url)
+    data = resp.read()
+    homepath = os.path.abspath('.')
+    testPath = homepath + '/temp/testFile.mp4'
+    testFile = open(testPath, "w")
+    testFile.write(data)
+    testFile.close()
+    capture = cv2.VideoCapture(testPath)
+    return capture
+
 
 if __name__ == '__main__':
    app.run(debug = True)

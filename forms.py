@@ -104,8 +104,8 @@ class SlideForm(DetailForm):
 
 class EditForm(FlaskForm):
     message = ""
-    videoName = TextField("Video Name",[validators.Required("A video name is required")])
-    imageName = TextField("Image Name",[validators.Required("An image name is required")])
+    videoName = TextField("Video Name",[validators.Required("A video name is required")], default = 'A Video Named Nothing')
+    imageName = TextField("Image Name",[validators.Required("An image name is required")], default = 'An Image Named Nothing')
     chooseVideo = FileField(u'Video File')
     chooseImage = FileField(u'Image File')
     timeTarget = DecimalField(u'Target time', [validators.required("duration must be specified"), validators.NumberRange(min = -0.02, max = 1000.00, message=u'values between 0.00 and - 10000.00 are allowed')], places = 2, rounding=None, default = 1.00)
@@ -114,7 +114,7 @@ class EditForm(FlaskForm):
     execute =  SubmitField(u'Execute')
     saveVideo =  SubmitField(u'SaveVideo')
     saveImage =  SubmitField(u'SaveImage')
-    selectFrame = SubmitField(u'Select Frame')
+    storeFrame = SubmitField(u'Store Frame')
 
 class SlideShowForm(DetailForm):
     message = ""
