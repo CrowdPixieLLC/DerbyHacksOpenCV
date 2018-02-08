@@ -141,7 +141,7 @@ def landing(pk):
                 storedImage = createDefaultStoredImage()
         if request.method == 'POST':
             if form.validate():
-                user = User.login(session['username'], session['password'])
+                
                 if form.saveVideo.data:
                     test = saveVideo(form.data, test)
                 if form.saveImage.data:
@@ -150,7 +150,9 @@ def landing(pk):
                     test = advanceToTime(form.data, test)
                     framePreview = StoredImage.Query.get(objectId=test['frameImage'])
                 if form.storeFrame.data:
-                    test = createImage(form.data, test)
+                    if test['frameImage']:
+                        storedImage = StoredImage.Query.get(objectId=test['frameImage'])
+                        test['imageId'] = test['frameImage']
                 if form.execute.data:
                     test = processImage(form.data, test)
                 if test['videoStatus'] == 'videoSaved':
@@ -161,16 +163,20 @@ def landing(pk):
                     storedImage = StoredImage.Query.get(objectId=test['imageId'])
                 else:
                     storedImage = createDefaultStoredImage()
-                user.storedStatus = test
-                user.save()
+
             else:
                 uploadedVideo = createDefaultUploadedVideo()
                 storedImage = createDefaultStoredImage()
+        user = User.login(session['username'], session['password'])
+        user.storedStatus = test
+        user.save()
         if test['frameVideo'] and test['videoId']:
             if test['frameVideo'] == test['videoId']:
                 framePreview = StoredImage.Query.get(objectId=test['frameImage'])
+            else: 
+                framePreview = ''
         else:
-            framePreview = None
+            framePreview = ''
         return render_template('landing.html', video=uploadedVideo, image = storedImage, form=form, framePreview=framePreview) 
     else:
         return render_template('login.html', form=form)

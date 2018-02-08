@@ -39,7 +39,7 @@
                         </video>
                     <br>
                     {% endif %}
-                    {% if framePreview %}
+                    {% if not framePreview == ''%}
                        <br>
                         <img src={{ framePreview.imageFileName.url }} class="img-rounded" alt={{image.imageName }} width="640" height="360"> 
                        <br>
